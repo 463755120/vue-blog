@@ -1,14 +1,10 @@
 .DS_Store
 node_modules/
-/dist/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+**/dist/
+*.log
+*.pid
+stats.json
+server/configs/private.js
+test-code/
+server/logs/*.log
 
-# Editor directories and files
-.idea
-.vscode
-*.suo
-*.ntvs*
-*.njsproj
-*.sln

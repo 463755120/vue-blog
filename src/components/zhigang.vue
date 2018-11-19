@@ -2,7 +2,6 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
-    <el-button type="primary">主要按钮</el-button>
     <ul>
       <li>
         <a
@@ -46,7 +45,7 @@
         </a>
       </li>
     </ul>
-    <h2>Ecosystem</h2>
+    <h2 class="h2-test">h2-test</h2>
     <ul>
       <li>
         <a
@@ -86,12 +85,12 @@
 
 <script>
 import axios from "axios";
-import {get} from "../js/http.js"
+import '../style/zhigang.css'
 export default {
-  name: "HelloWorld",
+  name: "Zhignag",
   data() {
     return {
-      msg: "Welcome to Your Vue.js App"
+      msg: "这是新的篇章"
     };
   },
   created() {
@@ -99,10 +98,7 @@ export default {
   },
   methods: {
     getdata() {
-      this.$get('/api/test')
-      .then(res=>{
-        console.log("请求成功")
-      })
+      console.log('德玛西亚')
     }
   }
 };
