@@ -85,7 +85,6 @@
 
 <script>
 import axios from "axios";
-import '../style/zhigang.css'
 export default {
   name: "Zhignag",
   data() {

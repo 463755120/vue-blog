@@ -7,12 +7,13 @@ import './style/test.css'
 import http from './js/http'
 import rourrou from './js/rourou'
 import { Button } from 'element-ui';
-import {get} from "./js/http.js"
+import {get,post} from "./js/http.js"
 
 
 Vue.config.productionTip = false
 Vue.use(Button)
 Vue.prototype.$get=get;
+Vue.prototype.$post=post;
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

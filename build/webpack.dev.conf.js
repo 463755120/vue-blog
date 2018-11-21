@@ -8,7 +8,7 @@ module.exports = {
   devtool: 'source-map',
   watchOptions: {
     ignored: /node_modules/,
-    aggregateTimeout: 300, //防止重复保存频繁重新编译,300ms内重复保存不打包
+    aggregateTimeout: 1000, //防止重复保存频繁重新编译,1000ms内重复保存不打包
     poll: 1000 //每秒询问的文件变更的次数
   },
   devServer: {
