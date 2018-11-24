@@ -24,5 +24,6 @@ export default new Router({
       component: Zhigang
     }
   ],
+  // 如果使用 history，打包回白屏.
   mode: 'history',
 })

@@ -1,12 +1,14 @@
 <template>
 <div class="homePage">
   <Side></Side>
+  <Article></Article>
 </div>
 </template>
 
 <script>
 import axios from "axios";
 import Side from "../Side/Side";
+import Article from "../Article/Article";
 export default {
   name: "HomePage",
   data() {
@@ -23,7 +25,8 @@ export default {
     }
   },
   components: {
-    Side
+    Side,
+    Article
   }
 };
 </script>
@@ -35,5 +38,7 @@ export default {
   max-width: 1000px;
   margin: 0 auto;
   padding-top: 85px;
+  display: flex;
+  
 }
 </style>

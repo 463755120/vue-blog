@@ -1,0 +1,1 @@
+export const showSide = state => state.showSide

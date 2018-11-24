@@ -1,0 +1,1 @@
+export const SET_SHOWSIDE_STATE = 'SET_SHOWSIDE_STATE'

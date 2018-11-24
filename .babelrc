@@ -10,7 +10,9 @@
     ],
     ["es2015", {
       "modules": false
-    }]
+    }],[
+      "stage-2"
+    ]
   ],
   "plugins": ["transform-runtime", "syntax-dynamic-import", [
     "component",

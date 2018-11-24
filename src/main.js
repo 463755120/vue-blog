@@ -8,7 +8,7 @@ import http from './js/http'
 import rourrou from './js/rourou'
 import { Button } from 'element-ui';
 import {get,post} from "./js/http.js"
-
+import store from './store'
 
 Vue.config.productionTip = false
 Vue.use(Button)
@@ -18,6 +18,7 @@ Vue.prototype.$post=post;
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
