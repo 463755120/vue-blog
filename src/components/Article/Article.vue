@@ -55,11 +55,11 @@ export default {
     };
   },
   created() {
-   // this.getdata();
+    this.getdata();
   },
   methods: {
     getdata() {
-      this.$get('/api/test')
+      this.$get('/api/publishArticles')
       .then(res=>{
         console.log("请求成功")
       })

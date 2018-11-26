@@ -136,10 +136,7 @@ const generateCongif = env => {
         {
           test: /\.js$/,
           use: scriptLoader,
-          exclude: file => (
-            /node_modules/.test(file) &&
-            !/\.vue\.js/.test(file)
-          )
+          exclude: /(node_modules)/
         },
         {
           test: /\.css$/,

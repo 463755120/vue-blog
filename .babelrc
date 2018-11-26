@@ -4,7 +4,10 @@
       "env",
       {
         "targets": {
-          "browsers": ["last 8 versions", "safari >= 7"]
+          "browsers": ["last 8 versions", "safari >= 7"],
+          "targets": {
+            "node": "current"
+          }
         }
       }
     ],

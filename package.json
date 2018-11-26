@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "node server/index.js",
-    "dev": "webpack-dev-server --env development --open --config build/webpack.common.conf.js",
+    "dev": "nodemon server/start.js",
     "build": "webpack  --env production --open --config build/webpack.common.conf.js --colors --profile --display-modules --progress"
   },
   "devDependencies": {
@@ -11,9 +11,11 @@
     "babel-loader": "^7.1.2",
     "babel-plugin-syntax-dynamic-import": "6.18.0",
     "babel-plugin-transform-runtime": "6.23.0",
-    "babel-preset-env": "1.7.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "6.24.1",
     "babel-preset-stage-2": "^6.22.0",
+    "babel-register": "^6.26.0",
     "babel-runtime": "6.26.0",
     "clean-webpack-plugin": "^0.1.19",
     "connect-history-api-fallback": "^1.5.0",
@@ -60,13 +62,19 @@
   "dependencies": {
     "@babel/core": "^7.1.2",
     "axios": "^0.18.0",
+    "babel-core": "^6.0.0",
     "babel-loader": "^8.0.4",
+    "koa-bodyparser": "^4.2.1",
+    "koa-compose": "^4.1.0",
+    "koa-convert": "^1.2.0",
     "koa-cors": "^0.0.16",
     "koa-router": "^7.4.0",
     "koa-webpack-dev-middleware": "^2.0.2",
     "koa-webpack-hot-middleware": "^1.0.3",
     "koa2-connect-history-api-fallback": "^0.0.6",
     "koa2-history-api-fallback": "^0.0.5",
+    "nodemon": "^1.18.6",
+    "require-dir": "^1.1.0",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1"
   },
