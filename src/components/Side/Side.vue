@@ -47,7 +47,7 @@ export default {
   },
   computed: {
     ...mapGetters(["showSide"])
-  }
+  },
 };
 </script>
 
@@ -114,7 +114,6 @@ export default {
         background-color: #e5e4e4;
         overflow-x: hidden;
         overflow-y: auto;
-
       }
       & .sideBox__main--open{
           box-shadow: 0 0 10px rgba(0,0,0,0.2);

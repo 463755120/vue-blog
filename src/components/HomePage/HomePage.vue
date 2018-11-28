@@ -26,7 +26,7 @@ export default {
   },
   components: {
     Side,
-    Article
+    Article,
   }
 };
 </script>
@@ -39,6 +39,6 @@ export default {
   margin: 0 auto;
   padding-top: 85px;
   display: flex;
-  
+
 }
 </style>

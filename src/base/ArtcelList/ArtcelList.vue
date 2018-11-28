@@ -29,14 +29,9 @@ export default {
     return {};
   },
   created() {
-    // this.getdata();
   },
   methods: {
-    getdata() {
-      this.$get("/api/test").then(res => {
-        console.log("请求成功");
-      });
-    }
+
   }
 };
 </script>

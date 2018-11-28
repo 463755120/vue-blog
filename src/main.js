@@ -5,13 +5,12 @@ import App from './App.vue'
 import router from './router'
 import './style/test.css'
 import http from './js/http'
-import rourrou from './js/rourou'
-import { Button } from 'element-ui';
+import elemenui from './js/elemenUi'
 import {get,post} from "./js/http.js"
 import store from './store'
 
 Vue.config.productionTip = false
-Vue.use(Button)
+elemenui()
 Vue.prototype.$get=get;
 Vue.prototype.$post=post;
 /* eslint-disable no-new */
