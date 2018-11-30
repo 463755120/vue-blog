@@ -1,10 +1,13 @@
 <template>
-  <markdown-editor v-model="content" ref="markdownEditor"></markdown-editor>
+  <div>
+    <markdown-editor v-model="content" ref="markdownEditor"></markdown-editor>
+    <el-button type="primary" @click="submit">提交</el-button>
+  </div>
 </template>
 
 <script>
 import markdownEditor from "vue-simplemde/src/markdown-editor";
-
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -14,12 +17,20 @@ export default {
       }
     };
   },
+  methods: {
+    submit() {
+      this.markdownShow(this.content);
+    },
+    ...mapMutations({
+      markdownShow: "MARKDOWN",
+    })
+  },
   components: {
     markdownEditor
   },
-  watch:{
-    content(news,){
-      console.log(news)
+  watch: {
+    content(news) {
+      
     }
   }
 };

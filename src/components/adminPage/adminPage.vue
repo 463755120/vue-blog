@@ -1,18 +1,21 @@
 <template>
-<div class="homePage">
-  <Top></Top>
-  <Side></Side>
-  <Article></Article>
-  <markdownEditor></markdownEditor>
-</div>
+  <div class="homePage">
+    <Top></Top>
+    <Side></Side>
+    <Article></Article>
+    <markdownEditor></markdownEditor>
+    <markdownShow :markdownfile='markdownData' ></markdownShow>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
 import Side from "../Side/Side";
 import Article from "../Article/Article";
-import Top from "../Top/Top"
-import markdownEditor from "../Editor/Editor"
+import Top from "../Top/Top";
+import markdownEditor from "../Editor/Editor";
+import markdownShow from "../../base/markdownFile/markdownFile";
+import { mapGetters } from "vuex";
 export default {
   name: "HomePage",
   data() {
@@ -28,11 +31,15 @@ export default {
       });
     }
   },
+  computed: {
+    ...mapGetters(["markdownData"])
+  },
   components: {
     Side,
     Article,
     Top,
-    markdownEditor
+    markdownEditor,
+    markdownShow
   }
 };
 </script>
