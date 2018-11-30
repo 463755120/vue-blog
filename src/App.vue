@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="wrap">
-            <Top></Top>
+          
             <transition name="fade" mode="out-in">
                 <!-- keep-alive排除article -->
                 <keep-alive>

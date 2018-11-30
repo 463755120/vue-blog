@@ -4,7 +4,8 @@
   <div class="sideBox__main" :class="{ 'sideBox__main--open': showSide}">
     <img src="https://img.imhjm.com/touxiang.png" alt="" class="sideBox__img">
     <p class="side_name">宇智波.志刚</p>
-    <p class="side_motto">华图教育前端开发</p>
+    <div class="side_motto">&nbsp &nbsp  三甲医院降生，真-共产主义接班人，战争学院不屈白银，火锅微辣布道师，
+易健身卡拥有者，不撸者，雾霾鉴赏专家，淘宝高级会员，华图教育前端</div>
     <ul class="sideBox__iconList">
         <li v-for="icon in iconList" class="sideBox__iconItem" :key="icon.name">
             <a class="sideBox__link" :href="icon.href" target="_blank"><i class="iconfont" :class="'icon-'+icon.name"></i></a>
@@ -58,6 +59,7 @@ export default {
   display: flex;
   flex-direction: column;
   text-align: center;
+  align-items: center;
   & img {
     width: 150px;
     border-radius: 50%;
@@ -72,8 +74,12 @@ export default {
     margin-bottom: 5px;
   }
   & .side_motto {
-    color: #bfbfbf;
+    color: #999;
     margin-bottom: 8px;
+    height: auto;
+    line-height: 20px;
+    width: 195px;
+    text-align: left;
   }
   & .sideBox__iconList {
     list-style: none;
@@ -103,6 +109,9 @@ export default {
       position: absolute;
       top: 0;
       left: 0;
+      & .side_motto{
+        margin-left: 38px;
+      }
       & .sideBox__main{
         position: fixed;
         left: 0px;

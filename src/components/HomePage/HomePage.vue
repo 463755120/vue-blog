@@ -1,5 +1,6 @@
 <template>
 <div class="homePage">
+   <Top></Top>
   <Side></Side>
   <Article></Article>
 </div>
@@ -9,6 +10,7 @@
 import axios from "axios";
 import Side from "../Side/Side";
 import Article from "../Article/Article";
+import Top from "../Top/Top"
 export default {
   name: "HomePage",
   data() {
@@ -27,6 +29,7 @@ export default {
   components: {
     Side,
     Article,
+    Top
   }
 };
 </script>
@@ -35,10 +38,9 @@ export default {
 <style >
 .homePage {
   padding: 10px;
-  max-width: 1000px;
   margin: 0 auto;
   padding-top: 85px;
   display: flex;
-
+  padding-left: 0;
 }
 </style>

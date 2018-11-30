@@ -1,7 +1,6 @@
 import axios from "axios";
 import store from '../store'
 const createToken = ()=>{
-  console.log(store,'store.state.token')
   if(store.state.token){
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + store.state.token; // 全局设定header的token验证，注意Bearer后有个空格
   }

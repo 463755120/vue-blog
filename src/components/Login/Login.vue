@@ -40,12 +40,11 @@ export default {
       this.createToken(userData)
         .then(res => {
           if (res.success) {
-             console.log(userData,'*登陆成功')
             this.$Message({
               message: "登陆成功",
               type: "success"
             })
-            //this.$router.push("/admin");
+            this.$router.push("/admin");
           }else{
             this.$Message.error("登录失败");
           }

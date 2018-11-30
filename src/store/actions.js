@@ -33,8 +33,8 @@ export const createToken = ({
 }, userData) => {
   return post('/api/login', userData).then(res => {
     if (res.success) {
-      console.log(res.token);
-      commit(types.CREATE_TOKEN, res.token);
+      console.log(res);
+      commit(types.CREATE_TOKEN, res);
     } else {
       commit(types.DELETE_TOKEN);
     }

@@ -14,13 +14,17 @@ const mutations = {
     state.allPage = +allPage;
     state.curPage = +curPage;
   },
-  [types.CREATE_TOKEN]:(state, token)=> {
-    state.token = token
-    sessionStorage.setItem('vue-blog-token', token);
+  [types.CREATE_TOKEN]:(state, res)=> {
+    state.token = res.token
+    state.userInfo = res.name
+    sessionStorage.setItem('vue-blog-token', res.token);
+    sessionStorage.setItem('vue-blog-userName', res.name);
   },
   [types.DELETE_TOKEN](state) {
     state.token = null;
+    state.userInfo = null;
     sessionStorage.setItem('vue-blog-token', '');
+    sessionStorage.setItem('vue-blog-userName', '');
 },
 }
 export default mutations
