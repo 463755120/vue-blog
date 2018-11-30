@@ -4,24 +4,35 @@
       "env",
       {
         "targets": {
-          "browsers": ["last 8 versions", "safari >= 7"],
+          "browsers": [
+            "last 8 versions",
+            "safari >= 7"
+          ],
           "targets": {
             "node": "current"
           }
         }
       }
     ],
-    ["es2015", {
-      "modules": false
-    }],[
+    [
+      "es2015",
+      {
+        "modules": false
+      }
+    ],
+    [
       "stage-2"
     ]
   ],
-  "plugins": ["transform-runtime", "syntax-dynamic-import", [
-    "component",
-    {
-      "libraryName": "element-ui",
-      "styleLibraryName": "theme-chalk"
-    }
-  ]]
+  "plugins": [
+    "transform-runtime",
+    "syntax-dynamic-import",
+    [
+      "component",
+      {
+        "libraryName": "element-ui",
+        "styleLibraryName": "theme-chalk"
+      }
+    ]
+  ]
 }
