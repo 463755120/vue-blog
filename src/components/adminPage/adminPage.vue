@@ -4,7 +4,7 @@
     <Side></Side>
     <Article></Article>
     <markdownEditor></markdownEditor>
-    <markdownShow :markdownfile='markdownData' ></markdownShow>
+    <!-- <markdownShow :markdownfile='markdownData' ></markdownShow> -->
   </div>
 </template>
 

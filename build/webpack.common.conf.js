@@ -121,6 +121,7 @@ const generateCongif = env => {
       alias: {
         'vue$': 'vue/dist/vue.js',
         'vuex$': 'vuex/dist/vuex.esm.js',
+        'highlight.js$': 'highlight.js/lib/highlight.js',
       },
       //导入的时候不用写拓展名
       extensions: [' ', '.js', '.json', '.vue', '.scss', '.css']

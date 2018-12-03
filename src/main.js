@@ -4,24 +4,38 @@ import Vue from "vue";
 import App from './App.vue'
 import router from './router'
 import './style/test.css'
-import http from './js/http'
 import elemenui from './js/elemenUi'
-import {get,post} from "./js/http.js"
+import {
+  get,
+  post
+} from "./js/http.js"
 import store from './store'
 
 Vue.config.productionTip = false
 elemenui()
-Vue.prototype.$get=get;
-Vue.prototype.$post=post;
-/* eslint-disable no-new */
+// 代码块高亮
+hljs.initHighlightingOnLoad()
+Vue.prototype.$get = get;
+Vue.prototype.$post = post;
+// ue-router的问题，在路由改变时，页面将会重新渲染并且会移除事件，这里就把 highlight 的事件给移除了。
+Vue.directive('highlight', function (el) {
+  let blocks = el.querySelectorAll('pre code');
+  blocks.forEach((block) => {
+    console.log(hljs)
+    hljs.highlightBlock(block)
+  })
+})
+
 new Vue({
   el: '#app',
   router,
   store,
-  components: { App },
+  components: {
+    App
+  },
   template: '<App/>'
 })
 // vue 热更新
-if(module.hot){
+if (module.hot) {
   module.hot.accept();
 }
