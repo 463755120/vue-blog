@@ -8,8 +8,8 @@
       >
         <div class="content">
           <h1 class="title">{{article.title}}</h1>
-          <p class="time">{{article.time}}</p>
-          <p class="describe">{{article.describe}}</p>
+          <p class="time">{{article.lastEditTime}}</p>
+          <p class="describe">{{article.abstract}}</p>
         </div>
       </li>
     </ul>

@@ -15,20 +15,27 @@
       ></el-input>
     </div>
     <markdown-editor v-model="editorData.content" ref="markdownEditor"></markdown-editor>
-    <el-button type="primary" @click="submit">提交</el-button>
+    <div class="submit-button">
+      <el-button type="primary" @click="submit">保存</el-button>
+      <div class="isPublish">
+        <span>发布</span>
+        <el-switch v-model="editorData.isPublish" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import markdownEditor from "vue-simplemde/src/markdown-editor";
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 export default {
   data() {
     return {
       editorData: {
         content: "",
         editorTitle: "",
-        editorDescribe: ""
+        editorDescribe: "",
+        isPublish: false
       },
       isComplete: false,
       configs: {
@@ -39,8 +46,8 @@ export default {
   methods: {
     submit() {
       this.checkVal(this.editorData);
-      console.log(this.isComplete);
       if (this.isComplete) {
+        this.submitMarkFile();
         // this.markdownShow(this.editorData.content);
       } else {
         this.$Message({
@@ -54,9 +61,25 @@ export default {
         return item !== "";
       });
     },
+    submitMarkFile() {
+      this.$post("/api/saveArticle", { article: this.editorData }).then(res => {
+        if (res.success) {
+          this.$Message({
+            message: "保持成功",
+            type: "success"
+          });
+          this.getAllPosts();
+        }else {
+          this.$Message({
+          message: "保存异常"
+        });
+        }
+      });
+    },
     ...mapMutations({
       markdownShow: "MARKDOWN"
-    })
+    }),
+    ...mapActions(["getAllPosts"])
   },
   components: {
     markdownEditor
@@ -71,11 +94,11 @@ export default {
 @import "~simplemde/dist/simplemde.min.css";
 .editor-content {
   margin-left: 120px;
-  & .editor-input{
+  & .editor-input {
     display: flex;
-    align-items:center;
-    margin-bottom:10px;
-    & span{
+    align-items: center;
+    margin-bottom: 10px;
+    & span {
       margin-right: 24px;
       font-size: 14px;
       color: #0084ff;
@@ -83,6 +106,18 @@ export default {
     }
     & .el-input {
       width: 706px;
+    }
+  }
+  & .submit-button {
+    display: flex;
+    justify-content: space-between;
+    & .isPublish {
+      display: flex;
+      align-items: center;
+      font-size: 20px;
+      & span {
+        margin-right: 30px;
+      }
     }
   }
 }

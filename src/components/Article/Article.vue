@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ArticleList :articles="articles"></ArticleList>
+    <ArticleList :articles="posts"></ArticleList>
     <Pagination :curPage='curPage' :allPage='allPage' @changePage='changePage'></Pagination>
   </div>
 </template>
@@ -13,48 +13,6 @@ export default {
   name: "Article",
   data() {
     return {
-      articles: [
-        {
-          title: "学习vue",
-          time: "2018年11月22日",
-          describe: "啦啦啦，不行就别写啦"
-        },
-        {
-          title: "学习vue",
-          time: "2018年11月22日",
-          describe: "啦啦啦，不行就别写啦"
-        },
-        {
-          title: "学习vue",
-          time: "2018年11月22日",
-          describe: "啦啦啦，不行就别写啦"
-        },
-        {
-          title: "学习vue",
-          time: "2018年11月22日",
-          describe: "啦啦啦，不行就别写啦"
-        },
-        {
-          title: "学习vue",
-          time: "2018年11月22日",
-          describe: "啦啦啦，不行就别写啦"
-        },
-        {
-          title: "学习vue",
-          time: "2018年11月22日",
-          describe: "啦啦啦，不行就别写啦"
-        },
-        {
-          title: "学习vue",
-          time: "2018年11月22日",
-          describe: "啦啦啦，不行就别写啦"
-        },
-        {
-          title: "学习vue",
-          time: "2018年11月22日",
-          describe: "啦啦啦，不行就别写啦"
-        }
-      ]
     };
   },
   created() {
@@ -69,7 +27,7 @@ export default {
 
   },
   computed: {
-    ...mapGetters(["curPage", "allPage", "showSide"])
+    ...mapGetters(["curPage", "allPage", "showSide","posts"])
   },
   components: {
     ArticleList,

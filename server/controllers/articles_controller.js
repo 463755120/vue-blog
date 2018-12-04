@@ -11,9 +11,8 @@ export async function getAllPublishArticles(ctx) {
     //第几段数据
     skip = limit * (page - 1);
   }
-  articleArr = await Article.find({
-      publish: true,
-    })
+  // conten字段不取
+  articleArr = await Article.find({ publish: true,},{content:0})
     .sort({
       createTime: -1
     })
@@ -22,14 +21,32 @@ export async function getAllPublishArticles(ctx) {
       ctx.throw(500, ERRMESG);
     });
   allNum = await Article.find({
-      publish: true,
+    publish: true,
   }).count().catch(err => {
-      this.throw(500, '服务器内部错误');
+    this.throw(500, '服务器内部错误');
   });
   allPage = Math.ceil(allNum / limit);
   ctx.body = {
     success: true,
     articleArr,
     allPage
+  };
+}
+export async function saveArticle(ctx) {
+  const articleDate = ctx.request.body.article;
+  const article = new Article({
+    title: articleDate.editorTitle,
+    content: articleDate.content,
+    abstract: articleDate.editorDescribe,
+    publish: articleDate.isPublish,
+    createTime: new Date(),
+    lastEditTime: new Date(),
+  });
+  let createResult = await article.save().catch(err => {
+    ctx.throw(500, '服务器内部错误');
+  });
+  ctx.body = {
+    success: true,
+    createResult,
   };
 }
