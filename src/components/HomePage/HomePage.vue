@@ -2,7 +2,7 @@
 <div class="homePage">
    <Top></Top>
   <Side></Side>
-  <Article></Article>
+  <Article :isPublish="true"></Article>
 </div>
 </template>
 

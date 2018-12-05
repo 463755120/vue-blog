@@ -3,6 +3,9 @@ const ERRMESG = '服务器内部错误'
 export async function getAllPublishArticles(ctx) {
   const limit = +ctx.query.limit || 4;
   const page = +ctx.query.page;
+  let isPublish = JSON.parse(ctx.query.isPublish) ? {
+    publish: true
+  } : {};
   let skip = 0;
   let articleArr;
   let allPage;
@@ -12,7 +15,9 @@ export async function getAllPublishArticles(ctx) {
     skip = limit * (page - 1);
   }
   // conten字段不取
-  articleArr = await Article.find({ publish: true,},{content:0})
+  articleArr = await Article.find(isPublish, {
+      content: 0
+    })
     .sort({
       createTime: -1
     })
@@ -20,9 +25,7 @@ export async function getAllPublishArticles(ctx) {
     .skip(skip).catch(err => {
       ctx.throw(500, ERRMESG);
     });
-  allNum = await Article.find({
-    publish: true,
-  }).count().catch(err => {
+  allNum = await Article.find(isPublish).count().catch(err => {
     this.throw(500, '服务器内部错误');
   });
   allPage = Math.ceil(allNum / limit);
@@ -48,5 +51,17 @@ export async function saveArticle(ctx) {
   ctx.body = {
     success: true,
     createResult,
+  };
+}
+
+export async function articleDetails(ctx) {
+  const articleID = ctx.query.articleID
+  console.log(articleID, '文章id')
+  const articleDetail = await Article.findOne({_id:articleID}).catch(err => {
+      ctx.throw(500, ERRMESG);
+    });
+  ctx.body = {
+    success: true,
+    articleDetail,
   };
 }

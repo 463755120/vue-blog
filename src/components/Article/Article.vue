@@ -1,7 +1,7 @@
 <template>
   <div>
-    <ArticleList :articles="posts"></ArticleList>
-    <Pagination :curPage='curPage' :allPage='allPage' @changePage='changePage'></Pagination>
+    <ArticleList :articles="posts" @handleArticle="handleArticle"></ArticleList>
+    <Pagination :curPage="curPage" :allPage="allPage" @changePage="changePage"></Pagination>
   </div>
 </template>
 
@@ -12,22 +12,36 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Article",
   data() {
-    return {
-    };
+    return {};
+  },
+  props: {
+    isPublish: {
+      type: Boolean,
+      default: true
+    }
   },
   created() {
     // this.getdata();
-    this.getAllPosts();
+    this.getArticleData();
   },
   methods: {
-    ...mapActions(["getAllPosts"]),
-    changePage(page){
-      this.getAllPosts({page});
-    }
-
+    changePage(page) {
+      this.getArticleData(page);
+    },
+    handleArticle(articleID){
+      this.ArticleDetails(articleID)
+    },
+    getArticleData(page) {
+      if (this.isPublish) {
+        this.getAllPosts({ page });
+      } else {
+        this.getAllArticel({ page });
+      }
+    },
+    ...mapActions(["getAllPosts", "getAllArticel","ArticleDetails"])
   },
   computed: {
-    ...mapGetters(["curPage", "allPage", "showSide","posts"])
+    ...mapGetters(["curPage", "allPage", "showSide", "posts",])
   },
   components: {
     ArticleList,

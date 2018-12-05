@@ -8,7 +8,7 @@ const HelloWorld = () => import('../components/HelloWorld.vue');
 //const HelloWorld = resolve => require(['../components/HelloWorld.vue'], resolve);
 const HomePage = () => import('../components/HomePage/HomePage.vue');
 const Login = () => import('../components/Login/Login.vue');
-const adminPage = () => import('../components/adminPage/adminPage.vue');
+const adminPage = () => import('../components/AdminPage/AdminPage.vue');
 const router = new Router({
   routes: [{
       path: '/',

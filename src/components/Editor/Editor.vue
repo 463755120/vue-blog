@@ -27,7 +27,7 @@
 
 <script>
 import markdownEditor from "vue-simplemde/src/markdown-editor";
-import { mapMutations, mapActions } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -42,6 +42,9 @@ export default {
         spellChecker: false // 禁用拼写检查
       }
     };
+  },
+  created() {
+    console.log(this.articleDetial);
   },
   methods: {
     submit() {
@@ -69,23 +72,48 @@ export default {
             type: "success"
           });
           this.getAllPosts();
-        }else {
+        } else {
           this.$Message({
-          message: "保存异常"
-        });
+            message: "保存异常"
+          });
         }
       });
+    },
+    confirm() {
+      this.$Confirm("此操作将不保存博客, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          this.$Message({
+            type: "success",
+            message: "删除成功!"
+          });
+        })
+        .catch(() => {
+          this.$Message({
+            type: "info",
+            message: "已取消删除"
+          });
+        });
     },
     ...mapMutations({
       markdownShow: "MARKDOWN"
     }),
     ...mapActions(["getAllPosts"])
   },
+  computed: {
+    ...mapGetters(["articleDetial"])
+  },
   components: {
     markdownEditor
   },
   watch: {
-    content(news) {}
+    articleDetial(values) {
+     // this.confirm()
+      console.log(values);
+    }
   }
 };
 </script>

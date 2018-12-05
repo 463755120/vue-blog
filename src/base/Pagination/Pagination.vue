@@ -73,7 +73,7 @@ export default {
       if (this.curPage <= 1) {
         return;
       }
-      this.$emit("changPage", this.curPage - 1);
+      this.$emit("changePage", this.curPage - 1);
     },
     nextPage() {
       if (this.curPage >= this.allPage) {

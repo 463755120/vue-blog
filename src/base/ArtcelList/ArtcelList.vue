@@ -4,6 +4,7 @@
       <li
         class="item"
         :key="index"
+        @click="handleClick(article.id)"
         v-for="(article, index) in articles"
       >
         <div class="content">
@@ -28,10 +29,11 @@ export default {
   data() {
     return {};
   },
-  created() {
-  },
+  created() {},
   methods: {
-
+    handleClick(articleID) {
+      this.$emit("handleArticle", articleID);
+    }
   }
 };
 </script>
@@ -43,6 +45,7 @@ export default {
     margin: 0 auto;
     padding: 0 10px 10px;
     margin-bottom: 15px;
+    cursor: pointer;
     & .content {
       display: flex;
       flex-direction: column;
@@ -58,7 +61,6 @@ export default {
         margin-top: 10px;
       }
       & .describe {
-
       }
     }
   }

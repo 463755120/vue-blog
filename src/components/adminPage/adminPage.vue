@@ -2,7 +2,7 @@
   <div class="homePage">
     <Top></Top>
     <Side></Side>
-    <Article></Article>
+    <Article :isPublish="false"></Article>
     <markdownEditor></markdownEditor>
     <!-- <markdownShow :markdownfile='markdownData' ></markdownShow> -->
   </div>

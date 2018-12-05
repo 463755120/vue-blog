@@ -33,5 +33,8 @@ const mutations = {
   [types.MARKDOWN]: (state, markdownData) => {
     state.markdownData = markdownData
   },
+  [types.ARTICLE_EDTIAL]: (state, articleDetial) => {
+    state.articleDetial = articleDetial
+  },
 }
 export default mutations

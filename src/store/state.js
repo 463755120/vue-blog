@@ -6,5 +6,6 @@ const state = {
   token:sessionStorage.getItem('vue-blog-token'),
   userInfo:sessionStorage.getItem('vue-blog-userName'),
   markdownData:"",
+  articleDetial:{}
 }
 export default state
