@@ -44,6 +44,7 @@ export default {
       },
       isComplete: false,
       isEditor: false,
+      showWaring:false,
       configs: {
         spellChecker: false // 禁用拼写检查
       }
@@ -97,6 +98,7 @@ export default {
         } else {
           // 这是之前的
           this.confirm(this.deletHttp);
+          // this.clearArticle();
         }
       }
     },
@@ -107,9 +109,11 @@ export default {
         if (res.success) {
           // 删除编辑状态
           this.clearArticle();
+          this.showWaring = true;
         }
         this.result(res, "删除成功", "删除失败");
       });
+
     },
     clearEditor() {
       this.editorData.title = "";
@@ -118,7 +122,7 @@ export default {
       this.editorData.publish = false;
       this.$Message({
         type: "success",
-        message: "删除成功!"
+        message: "清除成功!"
       });
     },
     result(res, successMesg, faileMesg) {
@@ -192,12 +196,13 @@ export default {
   },
   watch: {
     articleDetial(newValues, oldValues) {
-      console.log(newValues, oldValues, "**********");
-      // 以前的博客被删除 bug
-      if (oldValues.title !== "") {
-        this.confirm(this.articleDetialChage, newValues);
+      // 以前的博客被删除
+      if(oldValues === null || this.showWaring){
+        this.showWaring = false
+        this.articleDetialChage(newValues)
+        return
       }
-
+        this.confirm(this.articleDetialChage, newValues);
     }
   }
 };
