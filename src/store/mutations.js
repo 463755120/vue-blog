@@ -36,5 +36,8 @@ const mutations = {
   [types.ARTICLE_EDTIAL]: (state, articleDetial) => {
     state.articleDetial = articleDetial
   },
+  [types.CLEARN_ARTICLE]: (state) => {
+    state.articleDetial = null
+  },
 }
 export default mutations

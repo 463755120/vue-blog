@@ -2,7 +2,7 @@
   <div class="editor-content">
     <div class="editor-title editor-input">
       <span>文章标题</span>
-      <el-input class="el-input" v-model="editorData.editorTitle" placeholder="请输入标题"></el-input>
+      <el-input class="el-input" v-model="editorData.title" placeholder="请输入标题"></el-input>
     </div>
     <div class="editor-describe editor-input">
       <span>文章摘要</span>
@@ -11,15 +11,19 @@
         type="textarea"
         autosize
         placeholder="请输入摘要"
-        v-model="editorData.editorDescribe"
+        v-model="editorData.abstract"
       ></el-input>
     </div>
     <markdown-editor v-model="editorData.content" ref="markdownEditor"></markdown-editor>
     <div class="submit-button">
-      <el-button type="primary" @click="submit">保存</el-button>
+      <el-button type="primary" @click="update" v-if="editorData.articleId">更新</el-button>
+      <el-button type="primary" @click="submit" v-else>保存</el-button>
       <div class="isPublish">
         <span>发布</span>
-        <el-switch v-model="editorData.isPublish" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+        <el-switch v-model="editorData.publish" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+      </div>
+      <div class="delete">
+        <el-button type="warning" @click="deleteArticle">删除</el-button>
       </div>
     </div>
   </div>
@@ -33,19 +37,19 @@ export default {
     return {
       editorData: {
         content: "",
-        editorTitle: "",
-        editorDescribe: "",
-        isPublish: false
+        title: "",
+        abstract: "",
+        publish: false,
+        articleId: null
       },
       isComplete: false,
+      isEditor: false,
       configs: {
         spellChecker: false // 禁用拼写检查
       }
     };
   },
-  created() {
-    console.log(this.articleDetial);
-  },
+  created() {},
   methods: {
     submit() {
       this.checkVal(this.editorData);
@@ -58,38 +62,114 @@ export default {
         });
       }
     },
+    update() {
+      this.checkVal(this.editorData);
+      if (this.isComplete) {
+        const updataSrticle = {
+          title: this.editorData.title,
+          content: this.editorData.content,
+          abstract: this.editorData.abstract,
+          articleId: this.editorData.articleId,
+          lastEditTime: new Date()
+        };
+        this.$post("/api/changeArticle", updataSrticle).then(res => {
+          this.result(res, "更新成功", "更新失败");
+        });
+      } else {
+        this.$Message({
+          message: "请完善博客后再更新"
+        });
+      }
+    },
+    submitMarkFile() {
+      this.$post("/api/saveArticle", { article: this.editorData }).then(res => {
+        this.result(res, "保存成功", "保存失败");
+      });
+    },
+    // 新建文件的删除和已有博客的删除
+    deleteArticle() {
+      // 判断是否编辑中
+      this.isEditorData();
+      if (this.isEditor) {
+        if (this.editorData.articleId === null) {
+          // 这是新建的
+          this.confirm(this.clearEditor);
+        } else {
+          // 这是之前的
+          this.confirm(this.deletHttp);
+        }
+      }
+    },
+    deletHttp() {
+      this.$post("/api/deletaArticle", {
+        articleId: this.editorData.articleId
+      }).then(res => {
+        if (res.success) {
+          // 删除编辑状态
+          this.clearArticle();
+        }
+        this.result(res, "删除成功", "删除失败");
+      });
+    },
+    clearEditor() {
+      this.editorData.title = "";
+      this.editorData.content = "";
+      this.editorData.abstract = "";
+      this.editorData.publish = false;
+      this.$Message({
+        type: "success",
+        message: "删除成功!"
+      });
+    },
+    result(res, successMesg, faileMesg) {
+      if (res.success) {
+        this.$Message({
+          message: successMesg,
+          type: "success"
+        });
+        this.getAllArticel();
+      } else {
+        this.$Message({
+          message: faileMesg
+        });
+      }
+    },
     checkVal(editorData) {
       let editorDataVal = Object.values(editorData);
       this.isComplete = editorDataVal.every((item, index, arr) => {
         return item !== "";
       });
     },
-    submitMarkFile() {
-      this.$post("/api/saveArticle", { article: this.editorData }).then(res => {
-        if (res.success) {
-          this.$Message({
-            message: "保持成功",
-            type: "success"
-          });
-          this.getAllPosts();
-        } else {
-          this.$Message({
-            message: "保存异常"
-          });
-        }
+    isEditorData() {
+      const editorData = {
+        title: this.editorData.title,
+        content: this.editorData.content,
+        abstract: this.editorData.abstract
+      };
+      let editorDataVal = Object.values(editorData);
+      this.isEditor = editorDataVal.some((item, index, arr) => {
+        return item !== "";
       });
     },
-    confirm() {
+
+    articleDetialChage(values) {
+      // values可能是null
+      if (values) {
+        this.editorData = values;
+        this.editorData.articleId = values.id;
+      } else {
+        // 表示正在编辑的新建文件被替换
+        this.clearEditor();
+      }
+    },
+    confirm(confirmfn, value) {
       this.$Confirm("此操作将不保存博客, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
       })
         .then(() => {
-          this.$Message({
-            type: "success",
-            message: "删除成功!"
-          });
+          confirmfn(value);
         })
         .catch(() => {
           this.$Message({
@@ -99,9 +179,10 @@ export default {
         });
     },
     ...mapMutations({
-      markdownShow: "MARKDOWN"
+      markdownShow: "MARKDOWN",
+      clearArticle: "CLEARN_ARTICLE"
     }),
-    ...mapActions(["getAllPosts"])
+    ...mapActions(["getAllArticel"])
   },
   computed: {
     ...mapGetters(["articleDetial"])
@@ -110,9 +191,13 @@ export default {
     markdownEditor
   },
   watch: {
-    articleDetial(values) {
-     // this.confirm()
-      console.log(values);
+    articleDetial(newValues, oldValues) {
+      console.log(newValues, oldValues, "**********");
+      // 以前的博客被删除 bug
+      if (oldValues.title !== "") {
+        this.confirm(this.articleDetialChage, newValues);
+      }
+
     }
   }
 };
@@ -138,14 +223,17 @@ export default {
   }
   & .submit-button {
     display: flex;
-    justify-content: space-between;
     & .isPublish {
       display: flex;
       align-items: center;
       font-size: 20px;
+      margin-left: 50px;
       & span {
-        margin-right: 30px;
+        margin-right: 20px;
       }
+    }
+    & .delete {
+      margin-left: 416px;
     }
   }
 }

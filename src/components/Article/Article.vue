@@ -17,7 +17,7 @@ export default {
   props: {
     isPublish: {
       type: Boolean,
-      default: true
+      default: false
     }
   },
   created() {

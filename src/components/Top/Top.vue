@@ -26,7 +26,6 @@ export default {
   },
   methods: {
     getdata() {
-      console.log("这是头部");
     },
     handelSide(){
       this.setShowSideState(!this.showSide)

@@ -38,9 +38,9 @@ export async function getAllPublishArticles(ctx) {
 export async function saveArticle(ctx) {
   const articleDate = ctx.request.body.article;
   const article = new Article({
-    title: articleDate.editorTitle,
+    title: articleDate.title,
     content: articleDate.content,
-    abstract: articleDate.editorDescribe,
+    abstract: articleDate.abstract,
     publish: articleDate.isPublish,
     createTime: new Date(),
     lastEditTime: new Date(),
@@ -56,12 +56,43 @@ export async function saveArticle(ctx) {
 
 export async function articleDetails(ctx) {
   const articleID = ctx.query.articleID
-  console.log(articleID, '文章id')
-  const articleDetail = await Article.findOne({_id:articleID}).catch(err => {
-      ctx.throw(500, ERRMESG);
-    });
+  const articleDetail = await Article.findOne({
+    _id: articleID
+  }).catch(err => {
+    ctx.throw(500, ERRMESG);
+  });
   ctx.body = {
     success: true,
     articleDetail,
+  };
+}
+export async function changeArticle(ctx) {
+  const id = ctx.request.body.articleId
+  const article = await Article.findByIdAndUpdate(id, {
+    $set: ctx.request.body
+  }).catch(err => {
+    if (err.name === 'CastError') {
+      ctx.throw(400, 'id不存在');
+    } else {
+      ctx.throw(500, '服务器内部错误');
+    }
+  });
+
+  ctx.body = {
+    success: true,
+  };
+}
+
+export async function deletaArticle(ctx) {
+  const id = ctx.request.body.articleId
+  const article = await Article.findByIdAndRemove(id).catch(err => {
+    if (err.name === 'CastError') {
+      this.throw(400, 'id不存在');
+    } else {
+      this.throw(500, '服务器内部错误');
+    }
+  });
+  ctx.body = {
+    success: true,
   };
 }
