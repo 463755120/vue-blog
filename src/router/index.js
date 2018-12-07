@@ -9,6 +9,7 @@ const HelloWorld = () => import('../components/HelloWorld.vue');
 const HomePage = () => import('../components/HomePage/HomePage.vue');
 const Login = () => import('../components/Login/Login.vue');
 const adminPage = () => import('../components/AdminPage/AdminPage.vue');
+const articlePage = () => import('../components/ArticleDetial/ArticleDetial.vue');
 const router = new Router({
   routes: [{
       path: '/',
@@ -40,6 +41,11 @@ const router = new Router({
       meta: {
         authPage: true
       }
+    },
+    {
+      path: '/article',
+      name: 'articlePage',
+      component: articlePage,
     },
   ],
   // 如果使用 history，打包回白屏.

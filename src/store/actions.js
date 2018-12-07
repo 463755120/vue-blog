@@ -42,7 +42,7 @@ export const createToken = ({
 }, userData) => {
   return post('/api/login', userData).then(res => {
     if (res.success) {
-      console.log(res);
+
       commit(types.CREATE_TOKEN, res);
     } else {
       commit(types.DELETE_TOKEN);
@@ -59,7 +59,6 @@ export const ArticleDetails = ({
 }, articleID) => {
   return get('/api/articleDetails', {articleID,}).then(res => {
     if (res.success) {
-      console.log(res);
       commit(types.ARTICLE_EDTIAL, res.articleDetail);
     }
     return new Promise((resolve, reject) => {

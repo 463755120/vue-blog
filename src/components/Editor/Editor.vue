@@ -75,6 +75,7 @@ export default {
         };
         this.$post("/api/changeArticle", updataSrticle).then(res => {
           this.result(res, "更新成功", "更新失败");
+          this.clearEditor(false)
         });
       } else {
         this.$Message({
@@ -85,6 +86,7 @@ export default {
     submitMarkFile() {
       this.$post("/api/saveArticle", { article: this.editorData }).then(res => {
         this.result(res, "保存成功", "保存失败");
+        this.clearEditor(false)
       });
     },
     // 新建文件的删除和已有博客的删除
@@ -115,15 +117,18 @@ export default {
       });
 
     },
-    clearEditor() {
+    clearEditor(showMessage=true) {
       this.editorData.title = "";
       this.editorData.content = "";
       this.editorData.abstract = "";
       this.editorData.publish = false;
+      if(showMessage){
       this.$Message({
-        type: "success",
-        message: "清除成功!"
-      });
+          type: "success",
+          message: "清除成功!"
+        });
+      }
+      this.showWaring = true;
     },
     result(res, successMesg, faileMesg) {
       if (res.success) {
@@ -138,12 +143,14 @@ export default {
         });
       }
     },
+    // 检查是否完成博客
     checkVal(editorData) {
       let editorDataVal = Object.values(editorData);
       this.isComplete = editorDataVal.every((item, index, arr) => {
         return item !== "";
       });
     },
+    //是否编辑博客
     isEditorData() {
       const editorData = {
         title: this.editorData.title,
@@ -196,7 +203,7 @@ export default {
   },
   watch: {
     articleDetial(newValues, oldValues) {
-      // 以前的博客被删除
+      // 以前的博客被删除,防止二次弹窗提醒
       if(oldValues === null || this.showWaring){
         this.showWaring = false
         this.articleDetialChage(newValues)

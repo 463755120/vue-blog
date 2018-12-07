@@ -1,19 +1,18 @@
 <template>
   <div id="app">
     <div class="wrap">
-          
-            <transition name="fade" mode="out-in">
-                <!-- keep-alive排除article -->
-                <keep-alive>
-                    <router-view>
-                    </router-view>
-                </keep-alive>
-            </transition>
-        </div>
-        <footer class="footer">
-            <!-- <p>Copyright © <a href='https://github.com/BUPT-HJM'>BUPT-HJM</a>&nbsp;&nbsp;2017 </p>
-            <p>Created by <a href="https://github.com/BUPT-HJM/vue-blog.git">vue-blog</a></p> -->
-        </footer>
+      <transition name="fade" mode="out-in">
+          <!-- keep-alive排除article -->
+          <keep-alive exclude="HomePage">
+              <router-view>
+              </router-view>
+          </keep-alive>
+      </transition>
+    </div>
+    <footer class="footer">
+        <!-- <p>Copyright © <a href='https://github.com/BUPT-HJM'>BUPT-HJM</a>&nbsp;&nbsp;2017 </p>
+        <p>Created by <a href="https://github.com/BUPT-HJM/vue-blog.git">vue-blog</a></p> -->
+    </footer>
   </div>
 </template>
 

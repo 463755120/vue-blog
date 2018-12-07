@@ -22,14 +22,10 @@ export default {
     return {};
   },
   created() {
-    // this.getdata();
+
   },
   methods: {
-    getdata() {
-      this.$get("/api/test").then(res => {
-        console.log("请求成功");
-      });
-    }
+
   },
   computed: {
     ...mapGetters(["markdownData"])
@@ -40,6 +36,13 @@ export default {
     Top,
     markdownEditor,
     markdownShow
+  },
+  watch: {
+    $route: function(to, from) {
+      console.log(to, from);
+      if (to.path == "/ecolo/a") {
+      }
+    }
   }
 };
 </script>

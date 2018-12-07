@@ -1,6 +1,6 @@
 <template>
 <div class="homePage">
-   <Top></Top>
+  <Top></Top>
   <Side></Side>
   <Article :isPublish="true"></Article>
 </div>
@@ -25,6 +25,13 @@ export default {
         console.log("请求成功");
       });
     }
+  },
+  watch: {
+    // '$route': function (to,from) {
+    //   console.log(to,from)
+    //   if (to.path == '/ecolo/a') {
+    //   }
+    // }
   },
   components: {
     Side,

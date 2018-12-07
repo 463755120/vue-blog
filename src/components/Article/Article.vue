@@ -28,8 +28,11 @@ export default {
     changePage(page) {
       this.getArticleData(page);
     },
-    handleArticle(articleID){
-      this.ArticleDetails(articleID)
+    handleArticle(articleID) {
+      this.ArticleDetails(articleID);
+      if (this.isPublish) {
+        this.$router.push("/article");
+      }
     },
     getArticleData(page) {
       if (this.isPublish) {
@@ -38,10 +41,10 @@ export default {
         this.getAllArticel({ page });
       }
     },
-    ...mapActions(["getAllPosts", "getAllArticel","ArticleDetails"])
+    ...mapActions(["getAllPosts", "getAllArticel", "ArticleDetails"])
   },
   computed: {
-    ...mapGetters(["curPage", "allPage", "showSide", "posts",])
+    ...mapGetters(["curPage", "allPage", "showSide", "posts"])
   },
   components: {
     ArticleList,
@@ -49,8 +52,8 @@ export default {
   },
   watch: {
     showSide(val) {
-      console.log(val, "showSideshowSide");
-    }
+     
+    },
   }
 };
 </script>
