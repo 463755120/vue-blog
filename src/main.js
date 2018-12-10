@@ -21,7 +21,6 @@ Vue.prototype.$post = post;
 Vue.directive('highlight', function (el) {
   let blocks = el.querySelectorAll('pre code');
   blocks.forEach((block) => {
-    console.log(hljs)
     hljs.highlightBlock(block)
   })
 })

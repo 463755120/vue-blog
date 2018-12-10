@@ -3,7 +3,7 @@
     <Top></Top>
     <Side></Side>
     <Article :isPublish="false"></Article>
-    <markdownEditor></markdownEditor>
+    <markdownEditor ></markdownEditor>
     <!-- <markdownShow :markdownfile='markdownData' ></markdownShow> -->
   </div>
 </template>
@@ -15,17 +15,17 @@ import Article from "../Article/Article";
 import Top from "../Top/Top";
 import markdownEditor from "../Editor/Editor";
 import markdownShow from "../../base/markdownFile/markdownFile";
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "HomePage",
   data() {
     return {};
   },
-  created() {
-
-  },
+  created() {},
   methods: {
-
+    ...mapMutations({
+      clearArticle: "CLEARN_ARTICLE"
+    }),
   },
   computed: {
     ...mapGetters(["markdownData"])
@@ -36,13 +36,6 @@ export default {
     Top,
     markdownEditor,
     markdownShow
-  },
-  watch: {
-    $route: function(to, from) {
-      console.log(to, from);
-      if (to.path == "/ecolo/a") {
-      }
-    }
   }
 };
 </script>

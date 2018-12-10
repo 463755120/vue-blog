@@ -3,7 +3,7 @@
     <div class="wrap">
       <transition name="fade" mode="out-in">
           <!-- keep-alive排除article -->
-          <keep-alive exclude="HomePage">
+          <keep-alive exclude="['HomePage','articlePage']">
               <router-view>
               </router-view>
           </keep-alive>

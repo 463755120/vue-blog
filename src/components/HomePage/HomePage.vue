@@ -26,6 +26,7 @@ export default {
       });
     }
   },
+  
   watch: {
     // '$route': function (to,from) {
     //   console.log(to,from)

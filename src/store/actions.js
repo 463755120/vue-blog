@@ -3,7 +3,7 @@ import {
   get,
   post
 } from "../js/http"
-const getArticle = (commit,url, paginDate) => {
+const getArticle = (commit, url, paginDate) => {
   get(url, paginDate)
     .then(res => {
       commit('GET_ALL_POSTS', {
@@ -24,7 +24,11 @@ export const getAllPosts = function ({
   limit = 3,
   isPublish = true,
 } = {}) {
-  return getArticle(commit,'/api/getArticles', {page, limit,isPublish})
+  return getArticle(commit, '/api/getArticles', {
+    page,
+    limit,
+    isPublish
+  })
 }
 export const getAllArticel = function ({
   commit,
@@ -34,7 +38,11 @@ export const getAllArticel = function ({
   limit = 3,
   isPublish = false,
 } = {}) {
-  return getArticle(commit,'/api/getArticles', {page, limit,isPublish})
+  return getArticle(commit, '/api/getArticles', {
+    page,
+    limit,
+    isPublish
+  })
 }
 export const createToken = ({
   commit,
@@ -56,10 +64,17 @@ export const createToken = ({
 export const ArticleDetails = ({
   commit,
   state
-}, articleID) => {
-  return get('/api/articleDetails', {articleID,}).then(res => {
+}, detailData) => {
+  const articleID = detailData.articleID
+  const isPublish = detailData.isPublish
+  return get('/api/articleDetails', {articleID}).then(res => {
     if (res.success) {
-      commit(types.ARTICLE_EDTIAL, res.articleDetail);
+      if (isPublish) {
+        commit(types.PUBLICK_ARTICLE_EDTIAL, res.articleDetail);
+      } else {
+        commit(types.ARTICLE_EDTIAL, res.articleDetail);
+      }
+
     }
     return new Promise((resolve, reject) => {
       resolve(res);

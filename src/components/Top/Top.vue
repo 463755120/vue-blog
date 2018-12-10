@@ -80,6 +80,7 @@ export default {
     position: absolute;
     right: 10px;
     top: 50%;
+    font-size: 14px;
     width: 246px;
     height: 32px;
     margin-top: -16px;
@@ -105,7 +106,7 @@ export default {
       display: block;
     }
     & .userInfo{
-       width: 84px;
+       width: 106px;
     }
   }
 }

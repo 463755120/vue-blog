@@ -44,7 +44,7 @@ export default {
       },
       isComplete: false,
       isEditor: false,
-      showWaring:false,
+      showWaring: false,
       configs: {
         spellChecker: false // 禁用拼写检查
       }
@@ -71,11 +71,12 @@ export default {
           content: this.editorData.content,
           abstract: this.editorData.abstract,
           articleId: this.editorData.articleId,
+          publish: this.editorData.publish,
           lastEditTime: new Date()
         };
         this.$post("/api/changeArticle", updataSrticle).then(res => {
           this.result(res, "更新成功", "更新失败");
-          this.clearEditor(false)
+          this.clearEditor(false);
         });
       } else {
         this.$Message({
@@ -86,7 +87,7 @@ export default {
     submitMarkFile() {
       this.$post("/api/saveArticle", { article: this.editorData }).then(res => {
         this.result(res, "保存成功", "保存失败");
-        this.clearEditor(false)
+        this.clearEditor(false);
       });
     },
     // 新建文件的删除和已有博客的删除
@@ -115,15 +116,14 @@ export default {
         }
         this.result(res, "删除成功", "删除失败");
       });
-
     },
-    clearEditor(showMessage=true) {
+    clearEditor(showMessage = true) {
       this.editorData.title = "";
       this.editorData.content = "";
       this.editorData.abstract = "";
       this.editorData.publish = false;
-      if(showMessage){
-      this.$Message({
+      if (showMessage) {
+        this.$Message({
           type: "success",
           message: "清除成功!"
         });
@@ -195,6 +195,7 @@ export default {
     }),
     ...mapActions(["getAllArticel"])
   },
+
   computed: {
     ...mapGetters(["articleDetial"])
   },
@@ -204,12 +205,12 @@ export default {
   watch: {
     articleDetial(newValues, oldValues) {
       // 以前的博客被删除,防止二次弹窗提醒
-      if(oldValues === null || this.showWaring){
-        this.showWaring = false
-        this.articleDetialChage(newValues)
-        return
+      if (oldValues === null || this.showWaring) {
+        this.showWaring = false;
+        this.articleDetialChage(newValues);
+        return;
       }
-        this.confirm(this.articleDetialChage, newValues);
+      this.confirm(this.articleDetialChage, newValues);
     }
   }
 };

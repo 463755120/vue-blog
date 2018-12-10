@@ -29,9 +29,12 @@ export default {
       this.getArticleData(page);
     },
     handleArticle(articleID) {
-      this.ArticleDetails(articleID);
+      this.ArticleDetails({
+        articleID,
+        isPublish:this.isPublish
+      });
       if (this.isPublish) {
-        this.$router.push("/article");
+        this.$router.push(`/articledetial?id=${articleID}`);
       }
     },
     getArticleData(page) {
@@ -52,7 +55,7 @@ export default {
   },
   watch: {
     showSide(val) {
-     
+
     },
   }
 };

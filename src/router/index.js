@@ -9,7 +9,7 @@ const HelloWorld = () => import('../components/HelloWorld.vue');
 const HomePage = () => import('../components/HomePage/HomePage.vue');
 const Login = () => import('../components/Login/Login.vue');
 const adminPage = () => import('../components/AdminPage/AdminPage.vue');
-const articlePage = () => import('../components/ArticleDetial/ArticleDetial.vue');
+const ArticlDetial = () => import('../components/ArticleDetial/ArticleDetial.vue');
 const router = new Router({
   routes: [{
       path: '/',
@@ -43,9 +43,9 @@ const router = new Router({
       }
     },
     {
-      path: '/article',
-      name: 'articlePage',
-      component: articlePage,
+      path: '/articledetial',
+      name: 'ArticlDetial',
+      component: ArticlDetial,
     },
   ],
   // 如果使用 history，打包回白屏.

@@ -8,7 +8,8 @@ export default {
   name: "markdownFile",
   data() {
     return {
-      markdownData: ''
+      markdownData: '',
+       category: [],
     };
   },
   props: {
@@ -20,10 +21,28 @@ export default {
   created() {
    this.markdownData =  marked(this.markdownfile);
   },
+  beforeMount() {
+    this.$nextTick(() => {
+      // 提取文章标签，生成目录
+      Array.from(this.$refs.post.querySelectorAll("h1,h2,h3,h4,h5,h6")).forEach(
+        (item, index) => {
+          item.id = item.localName + "-" + index;
+          this.category.push({
+            tagName: item.localName,
+            text: item.innerText,
+            href: "#" + item.localName + "-" + index
+          });
+        }
+      );
+    });
+  },
   methods: {},
   watch:{
    markdownfile(val){
      this.markdownData =  marked(val);
+   },
+   category(val){
+     console.log(val)
    }
   }
 };

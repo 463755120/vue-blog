@@ -36,6 +36,9 @@ const mutations = {
   [types.ARTICLE_EDTIAL]: (state, articleDetial) => {
     state.articleDetial = articleDetial
   },
+  [types.PUBLICK_ARTICLE_EDTIAL]: (state, publicArticleDetial) => {
+    state.publicArticleDetial = publicArticleDetial
+  },
   [types.CLEARN_ARTICLE]: (state) => {
     state.articleDetial = null
   },
