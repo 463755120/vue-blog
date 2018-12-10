@@ -17,7 +17,7 @@ elemenui()
 hljs.initHighlightingOnLoad()
 Vue.prototype.$get = get;
 Vue.prototype.$post = post;
-// ue-router的问题，在路由改变时，页面将会重新渲染并且会移除事件，这里就把 highlight 的事件给移除了。
+// vue-router的问题，在路由改变时，页面将会重新渲染并且会移除事件，这里就把 highlight 的事件给移除了。
 Vue.directive('highlight', function (el) {
   let blocks = el.querySelectorAll('pre code');
   blocks.forEach((block) => {

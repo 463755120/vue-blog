@@ -35,7 +35,6 @@ export default {
     // 这里有问题
     if (this.publicArticleDetial === null) {
       this.articleID = this.$router.history.current.query.id;
-      console.log(this.articleID,"**********");
       // true是为了写入不同的state中
       this.ArticleDetails({
         articleID:this.articleID,
