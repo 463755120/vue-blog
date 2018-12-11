@@ -3,10 +3,8 @@
     <div class="wrap">
       <transition name="fade" mode="out-in">
           <!-- keep-alive排除article -->
-          <keep-alive exclude="['HomePage','articlePage']">
-              <router-view>
-              </router-view>
-          </keep-alive>
+        <router-view>
+        </router-view>
       </transition>
     </div>
     <footer class="footer">

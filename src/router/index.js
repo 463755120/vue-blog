@@ -49,7 +49,7 @@ const router = new Router({
     },
   ],
   // 如果使用 history，打包回白屏.
-  mode: 'history',
+  //mode: 'history',
 })
 router.beforeEach((to, from, next) => {
   if (to.meta.authPage) {

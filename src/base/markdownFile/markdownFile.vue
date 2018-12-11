@@ -1,6 +1,5 @@
 <template>
-  <div class="article__content markdown-body" v-html="markdownData" ref="post" v-highlight>
-  </div>
+  <div class="article__content markdown-body" v-html="markdownData" ref="post" v-highlight></div>
 </template>
 <script>
 import marked from "../../js/marked";
@@ -8,8 +7,8 @@ export default {
   name: "markdownFile",
   data() {
     return {
-      markdownData: '',
-       category: [],
+      markdownData: "",
+      category: []
     };
   },
   props: {
@@ -19,10 +18,11 @@ export default {
     }
   },
   created() {
-   this.markdownData =  marked(this.markdownfile);
+    this.markdownData = marked(this.markdownfile);
   },
   beforeMount() {
     this.$nextTick(() => {
+      console.log("读取dom")
       // 提取文章标签，生成目录
       Array.from(this.$refs.post.querySelectorAll("h1,h2,h3,h4,h5,h6")).forEach(
         (item, index) => {
@@ -36,14 +36,16 @@ export default {
       );
     });
   },
-  methods: {},
-  watch:{
-   markdownfile(val){
-     this.markdownData =  marked(val);
-   },
-   category(val){
-     console.log(val)
-   }
+  methods: {
+
+  },
+  watch: {
+    markdownfile(val) {
+      this.markdownData = marked(val);
+    },
+    category(val) {
+      this.$emit("getCategory", val);
+    }
   }
 };
 </script>
