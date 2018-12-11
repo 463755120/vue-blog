@@ -2,7 +2,7 @@
   "scripts": {
     "start": "node server/index.js",
     "dev": "nodemon server/start.js",
-    "build": "webpack  --env production --open --config build/webpack.common.conf.js --colors --profile --display-modules --progress"
+    "build": "webpack  --env production --open --config build/webpack.common.conf.js"
   },
   "devDependencies": {
     "autoprefixer": "^9.3.1",

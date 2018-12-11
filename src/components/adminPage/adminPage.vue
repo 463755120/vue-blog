@@ -13,7 +13,7 @@ import axios from "axios";
 import Side from "../Side/Side";
 import Article from "../Article/Article";
 import Top from "../Top/Top";
-import markdownEditor from "../Editor/Editor";
+import markdownEditor from "../Editor/vue-simp";
 import markdownShow from "../../base/markdownFile/markdownFile";
 import { mapGetters, mapMutations, mapActions } from "vuex";
 export default {

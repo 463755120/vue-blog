@@ -13,7 +13,7 @@ module.exports = {
     }),
     //打包分析工具
     // new BundleAnalyzerPlugin(),
-    new CleanWebpackPlugin('dist'),
+    new CleanWebpackPlugin('../dist'),
     //解决vue-router 懒加载打包报错 的问题
     new ExtractTextPlugin({
       filename: './static/css/[name].min.css',

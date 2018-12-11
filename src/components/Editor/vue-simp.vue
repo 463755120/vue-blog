@@ -14,8 +14,7 @@
         v-model="editorData.abstract"
       ></el-input>
     </div>
-    <textarea id="editor" v-model="editorData.content"></textarea>
-    <!-- <markdown-editor v-model="editorData.content" ref="markdownEditor"></markdown-editor> -->
+    <markdown-editor v-model="editorData.content" ref="markdownEditor"></markdown-editor>
     <div class="submit-button">
       <el-button type="primary" @click="update" v-if="editorData.articleId">更新</el-button>
       <el-button type="primary" @click="submit" v-else>保存</el-button>
@@ -31,12 +30,8 @@
 </template>
 
 <script>
-// import markdownEditor from "vue-simplemde/src/markdown-editor";
-import SimpleMDE from "simplemde";
-import css from "simplemde/dist/simplemde.min.css";
-import marked from "../../js/marked.js";
+import markdownEditor from "../../base/vue-simp/markdown-editor";
 import { mapGetters, mapMutations, mapActions } from "vuex";
-let simplemde;
 export default {
   data() {
     return {
@@ -56,24 +51,6 @@ export default {
     };
   },
   created() {},
-  mounted() {
-    this.$nextTick(() => {
-      simplemde.value(this.editorData.content);
-    });
-    simplemde = new SimpleMDE({
-      autoDownloadFontAwesome: true,
-      element: document.getElementById("editor"),
-      spellChecker: false,
-      previewRender: function(plainText) {
-        return marked(plainText); // Returns HTML from a custom parser
-      }
-    });
-     simplemde.codemirror.on('change', () => {
-       let value = simplemde.value();
-       this.editorData.content = value;
-       console.log(this.editorData.content)
-     })
-  },
   methods: {
     submit() {
       this.checkVal(this.editorData);
@@ -191,7 +168,6 @@ export default {
       if (values) {
         this.editorData = values;
         this.editorData.articleId = values.id;
-        simplemde.value(values.content);
       } else {
         // 表示正在编辑的新建文件被替换
         this.clearEditor();
@@ -224,7 +200,7 @@ export default {
     ...mapGetters(["articleDetial"])
   },
   components: {
-    // markdownEditor
+    markdownEditor
   },
   watch: {
     articleDetial(newValues, oldValues) {
@@ -236,12 +212,12 @@ export default {
       }
       this.confirm(this.articleDetialChage, newValues);
     }
-  },
+  }
 };
 </script>
 
 <style>
-/* @import "~simplemde/dist/simplemde.min.css"; */
+@import "~simplemde/dist/simplemde.min.css";
 .editor-content {
   margin-left: 120px;
   & .editor-input {
