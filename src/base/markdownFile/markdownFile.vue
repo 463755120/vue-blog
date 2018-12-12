@@ -18,6 +18,7 @@ export default {
     }
   },
   created() {
+
     this.markdownData = marked(this.markdownfile);
   },
   beforeMount() {
@@ -42,6 +43,7 @@ export default {
   watch: {
     markdownfile(val) {
       this.markdownData = marked(val);
+
     },
     category(val) {
       this.$emit("getCategory", val);

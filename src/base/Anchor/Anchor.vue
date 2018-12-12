@@ -31,32 +31,11 @@ export default {
     }
   },
   created() {
-    // this.getdata();
-    window.onscroll = throttle(this.getScrollTop, 30);
+
   },
 
   methods: {
-    getScrollTop() {
-      let scrollTop = 0,
-        bodyScrollTop = 0,
-        documentScrollTop = 0;
-      if (document.body) {
-        // 如果屏幕宽度小于850就直接return,不再去获取滚动值
-        if (document.body.clientWidth < 850) {
-          return;
-        }
-        bodyScrollTop = document.body.scrollTop;
-      }
-      if (document.documentElement) {
-        documentScrollTop = document.documentElement.scrollTop;
-      }
-      console.log(this.scrollTop);
-      this.scrollTop =
-        bodyScrollTop - documentScrollTop > 0
-          ? bodyScrollTop
-          : documentScrollTop;
-      // console.log(this.scrollTop)
-    }
+
   }
 };
 </script>
@@ -64,7 +43,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style >
 .categoryBox {
-  padding-left: 20px;
+  padding-left: 128px;
   padding-right: 15px;
   will-change: transform;
   position: fixed;
@@ -117,6 +96,13 @@ export default {
   }
   & .categoryBox__h6 {
     margin-left: 100p;
+  }
+}
+@custom-media --small-viewport (max-width: 850px);
+
+@media (--small-viewport) {
+  .categoryBox{
+    padding-left: 30px;
   }
 }
 </style>

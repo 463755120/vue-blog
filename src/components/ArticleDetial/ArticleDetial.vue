@@ -1,7 +1,9 @@
 <template>
   <div class="ArticlePage">
     <Top></Top>
-    <Anchor :category="categoryData"></Anchor>
+    <Side>
+      <Anchor :category="categoryData"></Anchor>
+    </Side>
     <div class="articleDate">
       <p class="title">{{publicArticleDetial.title}}</p>
       <p class="time">
@@ -18,17 +20,18 @@
 
 <script>
 import Top from "../Top/Top";
+import Side from "../Side/Side";
 import Anchor from "../../base/Anchor/Anchor";
 import markdownShow from "../../base/markdownFile/markdownFile";
 import { mapGetters, mapMutations, mapActions } from "vuex";
-import '../../style/markdown.css'
+import "../../style/markdown.css";
 export default {
   name: "ArticlDetial",
   data() {
     return {
       msg: "Welcome to Your Vue.js App",
       articleID: "",
-      categoryData:[],
+      categoryData: []
     };
   },
   created() {
@@ -38,25 +41,26 @@ export default {
       this.articleID = this.$router.history.current.query.id;
       // true是为了写入不同的state中
       this.ArticleDetails({
-        articleID:this.articleID,
+        articleID: this.articleID,
         isPublish: true
       });
     }
   },
-  beforeDestroy(){
+  beforeDestroy() {
     this.categoryData = [];
   },
   computed: {
     ...mapGetters(["publicArticleDetial"])
   },
   methods: {
-    getCategory(category){
-      this.categoryData = category
+    getCategory(category) {
+      this.categoryData = category;
     },
     ...mapActions(["ArticleDetails"])
   },
   components: {
     Top,
+    Side,
     Anchor,
     markdownShow
   }
@@ -74,7 +78,7 @@ export default {
   padding-left: 0;
   & .articleDate {
     width: 700px;
-    margin-left:360px;
+    margin-left: 360px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -102,6 +106,17 @@ export default {
       height: auto;
       line-height: 20px;
     }
+  }
+}
+@custom-media --small-viewport (max-width: 850px);
+
+@media (--small-viewport) {
+  .ArticlePage .articleDate{
+    margin-left: 0;
+    width: 100%;
+  }
+  .ArticlePage .articleDate .time{
+    margin-left: 0;
   }
 }
 </style>

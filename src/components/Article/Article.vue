@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="articleContent">
     <ArticleList :articles="posts" @handleArticle="handleArticle"></ArticleList>
     <Pagination :curPage="curPage" :allPage="allPage" @changePage="changePage"></Pagination>
   </div>
@@ -31,7 +31,7 @@ export default {
     handleArticle(articleID) {
       this.ArticleDetails({
         articleID,
-        isPublish:this.isPublish
+        isPublish: this.isPublish
       });
       if (this.isPublish) {
         this.$router.push(`/articledetial?id=${articleID}`);
@@ -54,13 +54,18 @@ export default {
     Pagination
   },
   watch: {
-    showSide(val) {
-
-    },
+    showSide(val) {}
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style >
+@custom-media --small-viewport (max-width: 850px);
+
+@media (--small-viewport) {
+  .articleContent {
+    margin: 0 auto;
+  }
+}
 </style>

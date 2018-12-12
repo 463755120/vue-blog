@@ -162,7 +162,7 @@ const generateCongif = env => {
     plugins: [
       new htmlWebpackPlugin({
         filename: 'index.html',
-        template: path.resolve(__dirname, '../html-img.html'),
+        template: path.resolve(__dirname, '../html.html'),
         inject: 'body',
         minify: {
           collapseWhitespace: env === 'production'
