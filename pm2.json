@@ -1,0 +1,30 @@
+{
+  "apps": [
+    {
+      "name": "vue-blog",
+      "script": "server/start.js",
+      "error_file": "server/logs/app-err.log",
+      "out_file": "server/logs/app-out.log",
+      "env_dev": {
+        "NODE_ENV": "development"
+      },
+      "env_production": {
+        "NODE_ENV": "production"
+      }
+    }
+  ],
+  "deploy": {
+    "production": {
+      "user": "zhigang",
+      "host": ["47.95.242.17"],
+      "port": "22",
+      "ref": "origin/master",
+      "repo": "git@github.com:463755120/vue-blog.git",
+      "path": "/home/zhigang/vue-blog",
+      "ssh_options": "StrictHostKeyChecking=no",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  }
+}
