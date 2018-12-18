@@ -32,14 +32,14 @@ const router = new Router({
         authPage: false
       }
     },
-    {
-      path: '/admin',
-      name: 'adminPage',
-      component: adminPage,
-      meta: {
-        authPage: true
-      }
-    },
+    // {
+    //   path: '/admin',
+    //   name: 'adminPage',
+    //   component: adminPage,
+    //   meta: {
+    //     authPage: true
+    //   }
+    // },
     {
       path: '/articledetial',
       name: 'ArticlDetial',
