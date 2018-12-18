@@ -17,7 +17,7 @@ import markdownEditor from "../Editor/vue-simp";
 import markdownShow from "../../base/markdownFile/markdownFile";
 import { mapGetters, mapMutations, mapActions } from "vuex";
 export default {
-  name: "HomePage",
+  name: "adminPage",
   data() {
     return {};
   },

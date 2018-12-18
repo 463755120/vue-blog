@@ -6,7 +6,7 @@ const Zhigang = resolve => require(['../components/zhigang.vue'], resolve);
 const HelloWorld = resolve => require(['../components/HelloWorld.vue'], resolve);
 const HomePage = resolve => require(['../components/HomePage/HomePage.vue'], resolve);
 const Login = resolve => require(['../components/Login/Login.vue'], resolve);
-// const adminPage = resolve => require(['../components/AdminPage/AdminPage.vue'], resolve);
+const adminPage = resolve => require(['../components/zhigangPage/zhigangPage.vue'], resolve);
 const ArticlDetial = resolve => require(['../components/ArticleDetial/ArticleDetial.vue'], resolve);
 const router = new Router({
   routes: [{
@@ -32,14 +32,14 @@ const router = new Router({
         authPage: false
       }
     },
-    // {
-    //   path: '/admin',
-    //   name: 'adminPage',
-    //   component: adminPage,
-    //   meta: {
-    //     authPage: true
-    //   }
-    // },
+    {
+      path: '/admin',
+      name: 'adminPage',
+      component: adminPage,
+      meta: {
+        authPage: true
+      }
+    },
     {
       path: '/articledetial',
       name: 'ArticlDetial',
