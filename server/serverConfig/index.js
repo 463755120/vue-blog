@@ -1,7 +1,7 @@
 import fs from 'fs';
 let config = {
     app: {
-        port: process.env.PORT || 8889,
+        port: process.env.PORT || 3000,
         baseApi: '/api',
     },
     mongodb: {

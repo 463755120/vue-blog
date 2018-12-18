@@ -19,7 +19,7 @@ mongoose.connect(config.mongodb.url, config.mongodbSecret);
 mongoose.connection.on('error', console.error);
 app.use(middleware())
 app.use(api())
-app.listen(3000, () => {
+app.listen(config.app.port, () => {
   console.log('The server is running at http://localhost:' + 3000);
   if(!isProd) {
   //  opn('http://localhost:3000')
