@@ -1,0 +1,2 @@
+拉取代码：pm2 deploy pm2.json production setup
+发布 pm2 deploy pm2.json production
