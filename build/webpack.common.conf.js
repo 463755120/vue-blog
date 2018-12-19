@@ -198,6 +198,7 @@ const generateCongif = env => {
   }
 }
 module.exports = env => {
+  console.log(env,"webpack中变量")
   let config = env === 'production' ?
     productionConfig :
     developmentConfig
