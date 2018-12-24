@@ -1,0 +1,69 @@
+mongod -f /root/mongodb/etc/mongo.conf 启动数据库
+解决liunx mongo无法被远程连接的问题
+https://blog.csdn.net/farYang/article/details/77461707
+// 给数据库创建用户
+
+//https://blog.csdn.net/wll_1017/article/details/72461573
+db.createUser(
+   {
+     user: "test",
+     pwd: "test",
+     roles: [ { role: "readWrite", db: "test" } ]
+   }
+)
+https://www.jianshu.com/p/a4e94bb8a052 关于mongodb用户权限的问题
+// 在studio 3t 用指定账户连接指定数据库
+// 在
+
+要做到的事
+1一句命令同时完成完成webpack基础配置，热更新以及epxress服务的启动
+css-loader modules 配置 js css 资源文件的切割
+webpack的总结
+webpack分为开发环境和生产环境，两者有很多共同点。本次记录只写遇到的坑和重要过程
+1common.webpack 是怎么将开发环境或生产环境结合起来的呢。
+const merge = require('webpack-merge')
+// generateCongif(env) 公共的webpack配置，config根据参数判断使用开发还生产
+merge(generateCongif(env), config)
+2common.webpack包括哪些东西
+  对于js资源文件的处理，例如es6的转换使用babel，其中安装的不止babel-loader一个loder
+，这个坑很多，表现在各种babel的版本要集中统一，要么7x，6x 8x，不要混用。
+  对于css的资源文件处理：1先定义一个变量（三元表达式判断是否为开发或生产）
+开发环境使用了常见的各种loader，其中vue的配置是vue-style-loader，post-css是css的趋势
+而且很多好用的css功能集成，自动前缀之类的。用法
+// 可以用很多超前的css语法 require("postcss-cssnext")(),
+// css压缩 require("cssnano")()
+生产环境少了很多loader style-loader vue-style-loader
+坑：css-loader 新版本取消了压缩功能。我使用post-css在生产环境压缩
+  对于资源文件的处理，url-loader的使用，生产和开发环境下配置参数不同，生产环境增加了img-loader
+用于图片压缩 坑是：图片压缩的插件不生效。目前我找到的都是生效的
+  以上所有的资源文件的loder和loader的配置都是变量以数组和对象储存。直接应用与 module.rules:
+入口命令（开发）：webpack-hot-middleware/client?noInfo=false&reload=true
+之所以这么写是为了使用热更新。用这个命令启动整个项目而且在前端的入口文件里面加上自动更新代码(!!!!一定是前端的入口代码。。。，vue和react都是main.js)
+if(module.hot){
+  module.hot.accept();
+}
+某种角度来说这也是坑。
+出口配置chunkFilename的作用是把某些资源文件打包成chunk（不是一整个js文件）而命名，为以后分步加载打基础
+resolve.alias 的作用是写一个webpack能找到文件的别名。例如直接在js中import("vue")是找不到的
+alias: {
+        'vue$': 'vue/dist/vue.js',
+      },
+这样写才能找到，vue入口文件需要手写引导，在vue-ci中也是这么配置
+resolve.extensions的作用是导入的时候不用写拓展名
+  plugins的作用是插件，和module区别是，插件适用整个项目，而不是具体某个资源文件。
+生成html的插件很重要，自动将css和js导入。配置可看例子。关于vueloader的配置是需要plugins的支持的。
+   以上是公共的配置，下面讲开发单独用到的配置，核心是开启node服务，热更新，文件监控功能等
+（没写完。。。 包括不使用webpack-server,自己的koa，坑 ，关键的服务代码 入口 history-api-fallback）
+启动文件是 入口文件在package.json文件中node方式启动。
+完成webpack热更新和静态资源编译需要webpack-dev-middleware hot-middleware
+具体的看代码。总的思想是webpack的配置通过以上两种插件被node服务执行。这次用koa2服务
+需要正确的插件。坑的地方：koa2的关于webpack的插件很坑，不知道是版本还是语法，最终的插件
+看我的代码，第二个 spa 路由跳转需要h5 history支持，也是需要特殊插件支持，并且需要封装一下
+详情见 historyApi.js 重点//必须放在最前面
+app.use(historyApiFallback({
+  verbose: true//打出转发日志
+})) 这个中间件必须放在最前面。
+开发单独用到的配置用到的plugins也都是关于热更新的。
+  生产环境的配置主要是压缩,大坑：解决vue-router 懒加载打包报错 的问题，extract-text-webpack-plugin
+中的配置好css 打包完成后路径，allChunks：true。
+"@babel/plugin-syntax-dynamic-import": "^6.26.3",
