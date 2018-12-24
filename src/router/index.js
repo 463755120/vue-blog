@@ -2,12 +2,12 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import store from '../store'
 Vue.use(Router)
-const Zhigang = resolve => require(['../components/zhigang.vue'], resolve);
-const HelloWorld = resolve => require(['../components/HelloWorld.vue'], resolve);
-const HomePage = resolve => require(['../components/HomePage/HomePage.vue'], resolve);
-const Login = resolve => require(['../components/Login/Login.vue'], resolve);
-const adminPage = resolve => require(['../components/zhigangPage/zhigangPage.vue'], resolve);
-const ArticlDetial = resolve => require(['../components/ArticleDetial/ArticleDetial.vue'], resolve);
+const Zhigang = () => import('../components/zhigang.vue');
+const HelloWorld = () => import('../components/HelloWorld.vue');
+const HomePage = () => import('../components/HomePage/HomePage.vue');
+const Login = () => import('../components/Login/Login.vue');
+const adminPage = () => import('../components/zhigangPage/zhigangPage.vue');
+const ArticlDetial = () => import('../components/ArticleDetial/ArticleDetial.vue');
 const router = new Router({
   routes: [{
       path: '/',

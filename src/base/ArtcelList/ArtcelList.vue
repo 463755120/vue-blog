@@ -61,6 +61,8 @@ export default {
         margin-top: 10px;
       }
       & .describe {
+        width:200px;
+        line-height: 20px
       }
     }
   }

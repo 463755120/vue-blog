@@ -77,8 +77,6 @@ export default {
   display: flex;
   padding-left: 0;
   & .articleDate {
-    width: 700px;
-    margin-left: 360px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -117,6 +115,9 @@ export default {
   }
   .ArticlePage .articleDate .time{
     margin-left: 0;
+  }
+  .abstract {
+    width: 100%;
   }
 }
 </style>

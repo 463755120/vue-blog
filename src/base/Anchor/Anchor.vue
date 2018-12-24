@@ -43,12 +43,12 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style >
 .categoryBox {
-  padding-left: 128px;
   padding-right: 15px;
   will-change: transform;
   position: fixed;
   top: 60px;
   bottom: 0;
+  left:40px;
   overflow-y: auto;
   width: 250px;
   & .categoryBoxtitle {
@@ -102,7 +102,7 @@ export default {
 
 @media (--small-viewport) {
   .categoryBox{
-    padding-left: 30px;
+    top:12px;
   }
 }
 </style>
