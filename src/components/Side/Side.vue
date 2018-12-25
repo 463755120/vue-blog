@@ -3,8 +3,6 @@
     <div class="sideBox__mask" :class="{ 'sideBox__mask--show': showSide}"></div>
     <div class="sideBox__main" :class="{ 'sideBox__main--open': showSide}">
       <slot>
-        <img src="https://img.imhjm.com/touxiang.png" alt class="sideBox__img">
-        <p class="side_name">宇智波.志刚</p>
         <div class="side_motto">
           &nbsp &nbsp 三甲医院降生，真-共产主义接班人，战争学院不屈白银，火锅微辣布道师，
           易健身卡拥有者，不撸者，雾霾鉴赏专家，淘宝高级会员，华图教育前端

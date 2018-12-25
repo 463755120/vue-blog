@@ -77,6 +77,7 @@ export default {
   display: flex;
   padding-left: 0;
   & .articleDate {
+    width: 900px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -100,7 +101,6 @@ export default {
     }
     & .content {
       width: 100%;
-      text-align: center;
       height: auto;
       line-height: 20px;
     }

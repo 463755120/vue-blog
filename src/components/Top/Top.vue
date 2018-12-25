@@ -60,7 +60,7 @@ export default {
   width: 100%;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
   padding: 0 40px 0 40px;
-  background: white;
+  background-color:rgba(255,255,255,0.5);
   z-index: 3;
   & .top-header-link {
     color: var(--mianColor);
