@@ -1,6 +1,6 @@
 <template>
   <div class="sideBox">
-    <div class="sideBox__mask" :class="{ 'sideBox__mask--show': showSide}"></div>
+    <div class="sideBox__mask" :class="{ 'sideBox__mask--show': showSide}" @click="changgeshowSide"></div>
     <div class="sideBox__main" :class="{ 'sideBox__main--open': showSide}">
       <slot>
         <div class="side_motto">
@@ -47,7 +47,13 @@ export default {
       this.$get("/api/test").then(res => {
         console.log("请求成功");
       });
-    }
+    },
+    changgeshowSide() {
+      this.setShowSideState(!this.showSide)
+    },
+    ...mapMutations({
+      setShowSideState: "SET_SHOWSIDE_STATE",
+    })
   },
   computed: {
     ...mapGetters(["showSide"])
@@ -154,7 +160,6 @@ export default {
     & .sideBox__tagItem--active:hover {
       color: blue;
     }
-
     .categoryBox--fixed {
       position: static;
       width: auto;

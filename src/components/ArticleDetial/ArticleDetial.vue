@@ -109,9 +109,12 @@ export default {
 @custom-media --small-viewport (max-width: 850px);
 
 @media (--small-viewport) {
-  .ArticlePage .articleDate{
-    margin-left: 0;
+  .ArticlePage{
     width: 100%;
+  }
+  .ArticlePage .articleDate{
+    width: 28em;
+    margin: 0 auto 0 20px;
   }
   .ArticlePage .articleDate .time{
     margin-left: 0;
