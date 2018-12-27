@@ -10,7 +10,6 @@ const app = new koa()
 const home  = serve(path.join(__dirname+"../../dist/"));
 const isDeve = process.env.NODE_ENV === 'development';
 //必须放在最前面
-console.log(process.env.NODE_ENV,"node中变量")
 if (isDeve) {
   require('../build/server')(app)
 }
@@ -23,5 +22,5 @@ app.use(middleware())
 app.use(api())
 app.listen(config.app.port, () => {
   console.log('The server is running at http://localhost:' + 3000);
-  
+
 });

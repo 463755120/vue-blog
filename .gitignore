@@ -4,4 +4,4 @@ node_modules/
 *.log
 .vscode
 dist
-
+.txt
