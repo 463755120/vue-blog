@@ -119,7 +119,7 @@ export default {
   .ArticlePage .articleDate .time{
     margin-left: 0;
   }
-  .abstract {
+  .ArticlePage .articleDate .abstract {
     width: 100%;
   }
 }
