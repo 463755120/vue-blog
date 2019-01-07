@@ -10,7 +10,7 @@ export async function getAllPublishArticles(ctx) {
   let articleArr;
   let allPage;
   let allNum;
-  if (page !== 0) {
+  if (page !== 0 && limit < 10 ) {
     //第几段数据
     skip = limit * (page - 1);
   }
