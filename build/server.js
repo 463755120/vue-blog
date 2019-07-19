@@ -17,5 +17,6 @@ module.exports = function middlewareWbpack(app) {
     verbose: true //打出转发日志
   }))
   app.use(wdm)
+  // 热更新
   app.use(webpackHotMiddleware(compiler))
 }
